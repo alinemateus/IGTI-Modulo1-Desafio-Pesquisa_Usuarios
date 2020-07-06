@@ -51,5 +51,6 @@ app.patch('/student/:id', async (req, res) => {
     res.status(500).send(err);
   }
 });
+//deletada a rota de PUT
 
 export { app as studentRouter };
