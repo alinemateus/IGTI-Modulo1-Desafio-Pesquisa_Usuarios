@@ -3,12 +3,19 @@ import express from 'express';
 import mongoose from 'mongoose';
 
 import { studentRouter } from './routes/studentRouter.js';
+const app = express();
+
+require('dotenv').config();
 
 /*Conexao com o MongoDB*/
 (async () => {
   try {
     await mongoose.connect(
-      'mongodb+srv://alineburke:6Smilles@cluster0.frrex.mongodb.net/grades?retryWrites=true&w=majority',
+      `mongodb+srv://
+    {$process.env.USERDB}
+          :  
+        {$process.env.PWDDB}  
+        @cluster0.frrex.mongodb.net/grades?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -23,4 +30,4 @@ const app = express();
 
 app.use(express.json());
 app.use(studentRouter);
-app.listen(3000, () => console.log('API inicializada'));
+app.listen(PORT, () => console.log('API inicializada'));
